@@ -1,0 +1,53 @@
+const { faker } = require("@faker-js/faker");
+const fs = require("node:fs");
+
+//asenna: npm install @faker-js/faker
+//Dokumentaatio: https://fakerjs.dev/
+
+// Function to generate a random city with temp object
+const generateCityWithTemp = (id) => {
+  return {
+    //id: id,
+    name: faker.location.city(),
+    year: faker.number.int({ min: 2000, max: 2100 }),
+    averageTemperature: faker.number.int({ min: -20, max: 35 }),
+    population: faker.number.int({ min: 10000, max: 5000000 }),
+    mayor: faker.person.firstName() + " " + faker.person.lastName(),
+  };
+};
+
+// Generate an array of 20 books
+const cities = Array.from({ length: 10 }, (_, index) =>
+  generateCityWithTemp(index + 1)
+);
+
+//Print the objects in list cities
+console.log(cities);
+console.log(typeof books);
+
+// Transform the objects in cities list into JSON text
+// and print it:
+const citiesJSON = JSON.stringify(cities);
+console.log(citiesJSON);
+console.log(typeof citiesJSON);
+
+// Kutsu funktiota, joka muuttaa mydatastring merkkijonomuuttujan arvon
+// objektilistaksi
+
+// Save as text on file
+saveTextToFile(citiesJSON, "cities.json");
+
+function saveTextToFile(text, fileName) {
+  fs.writeFile("./" + fileName, text, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("ok!");
+    }
+  });
+}
+
+//Julkaisemme tallennusfunktion myös toisen
+//skriptin käyttöön, koska koodia ei saa
+//kopioida.
+module.exports = { saveTextToFile };
