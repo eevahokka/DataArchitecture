@@ -1,3 +1,5 @@
+// Generate data for 10 cities, describing their average temperature in this century. Include population and mayor's name. Don't include id.
+
 const { faker } = require("@faker-js/faker");
 const fs = require("node:fs");
 
